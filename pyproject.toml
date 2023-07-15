@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "intelligentsia"
+version = "0.1.0"
+description = "Polyglot machine learning software, with a heavy focus on online learning/online convex optimization."
+license = "Apache-2.0"
+authors = ["Arnold Salas <asalas@virgointellectual.com>"]
+readme = "README.md"
+repository = "https://github.com/virgointellectual/intelligentsia"
+packages = [{include = "intelligentsia"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+numpy = "^1.25.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
