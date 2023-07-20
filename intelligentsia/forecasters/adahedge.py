@@ -18,9 +18,10 @@ __all__ = ['adahedge']
 import math as _math
 
 import numpy as _np
+import numpy.typing as _npt
 
 
-def adahedge(l):
+def adahedge(l: _npt.ArrayLike) -> tuple[_np.ndarray, _np.ndarray]:
     """Return the weights and losses of AdaHedge.
 
     Parameters
