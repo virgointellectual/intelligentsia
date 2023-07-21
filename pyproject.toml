@@ -6,7 +6,7 @@ license = "Apache-2.0"
 authors = ["Arnold Salas <asalas@virgointellectual.com>"]
 readme = "README.md"
 repository = "https://github.com/virgointellectual/intelligentsia"
-packages = [{include = "intelligentsia", from = "lib"}]
+packages = [{include = "Lib/intelligentsia/**/*.py"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
