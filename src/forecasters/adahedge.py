@@ -21,7 +21,9 @@ import numpy as _np
 import numpy.typing as _npt
 
 
-def adahedge(l: _npt.ArrayLike) -> tuple[_np.ndarray, _np.ndarray]:
+def adahedge(
+    l: _npt.NDArray[_np.float64]
+) -> tuple[_npt.NDArray[_np.float64], _npt.NDArray[_np.float64]]:
     """Return the weights and losses of AdaHedge.
 
     Parameters
@@ -54,7 +56,6 @@ def adahedge(l: _npt.ArrayLike) -> tuple[_np.ndarray, _np.ndarray]:
        pp. 1281-1316, 2014.
        URL: <https://jmlr.org/papers/volume15/rooij14a/rooij14a.pdf>.
     """
-    l = _np.asarray(l)
     T, K = l.shape
     # There have to be at least 2 experts.
     if K < 2:
