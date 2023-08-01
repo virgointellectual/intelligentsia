@@ -38,6 +38,12 @@ def adahedge(l: _npt.ArrayLike) -> tuple[_np.ndarray, _np.ndarray]:
     h : (T,) ndarray
         The loss incurred by the algorithm at each timestep.
 
+    Raises
+    ------
+    ValueError
+        If the number of experts (i.e. the second dimension of `l`) is
+        less than 2.
+
     Notes
     -----
     This is the Python translation of the original, numerically robust
@@ -50,9 +56,12 @@ def adahedge(l: _npt.ArrayLike) -> tuple[_np.ndarray, _np.ndarray]:
     """
     l = _np.asarray(l)
     T, K = l.shape
-    W = _np.empty((T, K))
-    h = _np.empty(T)
-    L = _np.zeros(K)
+    # There have to be at least 2 experts.
+    if K < 2:
+        raise ValueError('l must have second dimension greater or equal than 2')
+    W = _np.full((T, K), _math.nan)
+    h = _np.full((T,1), _math.nan)
+    L = _np.zeros((1, K))
     Delta = 0
 
     for t in range(T):
@@ -65,8 +74,7 @@ def adahedge(l: _npt.ArrayLike) -> tuple[_np.ndarray, _np.ndarray]:
         h[t] = _np.dot(w, l[t])
         L += l[t]
         _, M = _mix(eta, L)
-        delta = max(0, h[t] - (M-Mprev))
-        # Max clips numeric Jensen violation.
+        delta = max(0, h[t] - (M-Mprev))  # Max clips numeric Jensen violation.
         Delta += delta
 
     return W, h
